@@ -1,16 +1,20 @@
-﻿using System;
+﻿using AutomationFramework.Pages;
+using AutomationTestStore.BaseClass;
+using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AutomationTestStore.BaseClass;
-using OpenQA.Selenium;
 
 namespace AutomationTestStore.Pages
 {
-    internal class HomePage : Driver
+    public class HomePage : BasePage
     {
-        public static IWebElement homePageValidationText = driver.FindElement(By.XPath("//*[@title='Automation Test Store']"));
-        public static IWebElement continueButton = driver.FindElement(By.XPath("//*[@title='Continue']"));
+        public HomePage(IWebDriver driver) : base(driver)
+        {
+        }
+        public IWebElement homePageValidationText => Driver.FindElement(By.XPath("//*[@title='Automation Test Store']"));
+        public IWebElement continueButton => Driver.FindElement(By.XPath("//*[@title='Continue']"));
     }
 }

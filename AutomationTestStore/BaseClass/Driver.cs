@@ -1,37 +1,51 @@
-﻿using OpenQA.Selenium;
+﻿using AutomationTestStore.Configuration;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutomationTestStore.Configuration;
 
 
 namespace AutomationTestStore.BaseClass
 {
      
-    public class Driver
+    public static class Driver
     {
-        //Configuration config = new Configuration();
-        public static IWebDriver driver;
-        [SetUp]
-        public void Setup()
+
+        public static IWebDriver webDriver { get; private set; }
+
+        public static IWebDriver InitializeDriver()
         {
-            driver = new ChromeDriver();
-            driver.Url = "https://automationteststore.com/index.php?rt=account/login";
-            driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
+            webDriver = new ChromeDriver();
+            webDriver.Navigate().GoToUrl(Config.BaseUrl);
+            webDriver.Manage().Window.Maximize();
+
+            return webDriver;
         }
 
-        [TearDown]
-        public void Cleanup()
+        public static void QuitDriver()
         {
-            if (driver != null)
-            {
-                driver.Quit();
-                driver.Dispose();
-            }
+            webDriver.Quit();
+            webDriver.Dispose();
         }
+
+        ////Configuration config = new Configuration();
+        //public static IWebDriver driver;
+        
+        //[SetUp]
+        //public void Setup()
+        //{
+        //    driver = new ChromeDriver();
+        //    driver.Url = "https://automationteststore.com/index.php?rt=account/login";
+        //    driver.Manage().Window.Maximize();
+        //    driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
+        //}
+
+        //[TearDown]
+        //public void Cleanup()
+        //{
+        //    if (driver != null)
+        //    {
+        //        driver.Quit();
+        //        driver.Dispose();
+        //    }
+        //}
     }
 }
