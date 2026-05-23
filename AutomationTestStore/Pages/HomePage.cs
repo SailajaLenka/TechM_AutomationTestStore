@@ -15,6 +15,8 @@ namespace AutomationTestStore.Pages
         {
         }
         public IWebElement homePageValidationText => Driver.FindElement(By.XPath("//*[@title='Automation Test Store']"));
-        public IWebElement continueButton => Driver.FindElement(By.XPath("//*[@title='Continue']"));
+        public By ByContinueButton = By.XPath("//*[@title='Continue']");
+
+        public IWebElement continueButton => Driver.FindElement(ByContinueButton);
     }
 }

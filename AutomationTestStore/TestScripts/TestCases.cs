@@ -18,26 +18,28 @@ namespace AutomationTestStore.TestScripts
             HomePage homePage = new HomePage(WebDriver);
             RegistartionPage regPage = new RegistartionPage(WebDriver);
             WaitHelper waits = new WaitHelper(WebDriver);
+            waits.WaitForElement(homePage.ByContinueButton,10);
             homePage.continueButton.Click();
             int ranNum = waits.randomNumber();
 
             Actions actions = new Actions(WebDriver);
             SelectElement select = new SelectElement(regPage.region);
-            actions.MoveToElement(regPage.firstName).Click().SendKeys("Test0000" + ranNum).Build().Perform();
-            actions.MoveToElement(regPage.lasttName).Click().SendKeys("Test456").Build().Perform();
-            actions.MoveToElement(regPage.eMail).Click().SendKeys("test" + ranNum + "@gmail.com").Build().Perform();
-            actions.MoveToElement(regPage.address1).Click().SendKeys("gdgdfgdf").Build().Perform();
-            actions.MoveToElement(regPage.city).Click().SendKeys("testcityerrwer").Build().Perform();
-            actions.MoveToElement(regPage.region).Click().Build().Perform();
+            regPage.firstName.SendKeys("Test0000" + ranNum);
+            regPage.lasttName.SendKeys("Test456");
+            regPage.eMail.SendKeys("test1208" + ranNum + "@gmail.com");
+            regPage.address1.SendKeys("gdgdfgdf");
+            regPage.city.SendKeys("testcityerrwer");
+            regPage.region.Click();
             select.SelectByText("Aberdeen");
-            actions.MoveToElement(regPage.postcode).Click().SendKeys("AB10").Build().Perform();
-            actions.MoveToElement(regPage.loginName).Click().SendKeys("Test" + ranNum + "Test").Build().Perform();
-            actions.MoveToElement(regPage.password).Click().SendKeys("password@123").Build().Perform();
-            actions.MoveToElement(regPage.passwordConfirm).Click().SendKeys("password@123").Build().Perform();
+            regPage.postcode.SendKeys("AB10");
+            regPage.loginName.SendKeys("Test" + ranNum + "Test");
+            regPage.password.SendKeys("password@123");
+            regPage.passwordConfirm.SendKeys("password@123");
             regPage.privacyPolicy.Click();
             actions.SendKeys(Keys.End).Perform();
             regPage.registrationButton.Click();
             string expectedText = "Welcome back Test0000" + ranNum;
+            waits.WaitForElement(regPage.ByAccountVerification, 10);
             string actualText = regPage.accountVerification.Text;
 
             /* Validating the registration success or not */

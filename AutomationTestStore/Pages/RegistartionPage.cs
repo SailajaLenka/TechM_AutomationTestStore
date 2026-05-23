@@ -28,7 +28,9 @@ namespace AutomationTestStore.Pages
         public IWebElement passwordConfirm => Driver.FindElement(By.Id("AccountFrm_confirm"));
         public IWebElement privacyPolicy => Driver.FindElement(By.Id("AccountFrm_agree"));
         public IWebElement registrationButton => Driver.FindElement(By.XPath("//*[@title='Continue']"));
-        public IWebElement accountVerification => Driver.FindElement(By.XPath("//div[contains(text(),'Welcome back')]"));
+
+        public By ByAccountVerification = By.XPath("//div[contains(text(),'Welcome back')]");
+        public IWebElement accountVerification => Driver.FindElement(ByAccountVerification);
         public IWebElement logoff => Driver.FindElement(By.XPath("//ul[@class='side_account_list']/li[10]"));
     }
 }
